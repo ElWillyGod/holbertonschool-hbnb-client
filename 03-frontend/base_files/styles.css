@@ -3,30 +3,150 @@
   You'll probably need to override some of theese styles.
 */
 
+#places-list {
+  display: grid;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  justify-content: center;
+}
+
+.place-card,
+.review-card {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.place-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+#place-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.place-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+}
+
+
+.details-button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#add-review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 10px;
+}
+
+#add-review button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.place-info {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #f4f4f4;
-    color: #333;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #8ee2f1;
+    border-bottom: 1px solid #ddd;
+}
+.logo {
+    max-height: 50px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
 }
 
 nav a {
-    color: #fff;
     text-decoration: none;
-    margin-left: 1rem;
+    color: #333;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #ddd;
+}
+
+.login-button, .inicio-button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #555;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #8ee2f1;
+    border-top: 1px solid #ddd;
 }
 
 main {
     padding: 2rem;
-}
+  }
