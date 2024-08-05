@@ -2,42 +2,24 @@
   This is a SAMPLE FILE to get you started.
   Please, follow the project instructions to complete the tasks.
 */
-
-document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.getElementById("login-form");
-
-  if (loginForm) {
-    loginForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      // Your code to handle form submission
-
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      loginUser(email, password);
-    });
-  }
-});
-
 async function loginUser(email, password) {
-  const response = await fetch("https://127.0.0.1:5000/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
+  // Sends response
+  const response = await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password }),
   });
+  // Handles response
 
-  console.log(response.request.headers);
   if (response.ok) {
-
     const data = await response.json();
     document.cookie = `token=${data.access_token}; path=/`;
-    window.location.href = "index.html";
-
-  } else {
-
-    alert("Login failed: " + response.statusText);
-  }
+    window.location.href = 'index.html';
+} else {
+    alert('Login failed: ' + response.statusText);
+}
 }
 
 function checkAuthentication() {
@@ -65,24 +47,27 @@ function getCookie(name) {
   return null;
 }
 
-async function fetchPlaces(token) {
-  // Make a GET request to fetch places data
-  // Include the token in the Authorization header
-  // Handle the response and pass the data to displayPlaces function
-
-  const response = await fetch("https://127.0.0.1:5000/places", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (response.ok) {
-    const data = await response.json();
-    displayPlaces(data);
-  } else {
-    alert("Failed to fetch places: " + response.statusText);
+/*
+function fetchPlaces() {
+  const headers = {Accept: 'application/json', }
+  const options = {method: 'GET', headers};
+  const token = getJwtToken();
+  if (token !== '') {
+    headers['Authorization'] = `Bearer ${token}`
   }
+  fetch('http://localhost:5000/places', options)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      displayPlaces(data);
+    })
+    .catch((err) => {
+      //console.log(err.toString());
+      throw err;
+    });
 }
+*/
 
 function displayPlaces(places) {
   // Clear the current content of the places list
@@ -105,6 +90,41 @@ function displayPlaces(places) {
     placesList.appendChild(placeElement);
   }
 }
+
+async function fetchPlaces(token) {
+  // Make a GET request to fetch places data
+  // Include the token in the Authorization header
+  // Handle the response and pass the data to displayPlaces function
+  const response = await fetch("http://localhost:5000/places", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+  });
+  if (response.ok) {
+    const data = await response.json();
+    displayPlaces(data);
+  } else {
+    alert("Failed to fetch places: " + response.statusText);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const loginForm = document.getElementById("login-form");
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      // Your code to handle form submission
+      loginUser(loginForm.email.value, loginForm.password.value);
+    });
+  }
+
+  checkAuthentication();
+});
+
 
 document.getElementById('country-filter').addEventListener('change', (event) => {
   // Get the selected country value
